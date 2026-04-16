@@ -186,6 +186,31 @@
             margin-bottom: 20px;
         }
 
+        .reward-box {
+            background: #fff3cd;
+            border: 2px solid #ffeeba;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+            display: none;
+        }
+
+        .reward-box h3 {
+            color: #856404;
+            margin-top: 0;
+        }
+
+        .play-again-btn {
+            background-color: var(--primary-green);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
         footer { text-align: center; padding: 60px; background: #f1f3f1; font-style: italic; }
     </style>
 </head>
@@ -193,6 +218,7 @@
 
 <nav>
     <a href="#home">Home</a>
+    <a href="#about">About Us</a>
     <a href="#tracker">Daily Tracker</a>
     <a href="#game">Eco Game</a>
     <a href="#actions">Dniester Canyon</a>
@@ -205,9 +231,10 @@
 
 <div class="container">
     
-    <section>
-        <h2>Our School and City</h2>
-        <p>This project is about promoting an eco-friendly lifestyle. Watch our video to see how we protect nature through daily actions.</p>
+    <section id="about">
+        <h2>Our School and Beautiful Zalishchyky</h2>
+        <p>Welcome to the <strong>Zalishchyky State Gymnasium</strong>! We are proud to lead this eco-project from our incredible hometown. Zalishchyky is a unique and picturesque city, famously situated on a peninsula formed by a sweeping meander of the Dniester River. Surrounded by such spectacular nature, we feel a deep responsibility to protect our environment.</p>
+        <p>This project is designed to promote an eco-friendly lifestyle. Watch our video to see how we protect nature through daily actions.</p>
         <div class="video-wrapper">
             <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
         </div>
@@ -252,18 +279,27 @@
 
     <section id="game">
         <h2>Mini-Game: Recycle Master</h2>
-        <p>Sort the items into the correct bins. Earn 10 points for the right choice, lose 5 for the wrong one.</p>
+        <p>Sort the items into the correct bins. Earn 10 points for the right choice, lose 5 for the wrong one. <strong>Reach 100 points to earn your Eco-Master Badge!</strong></p>
         
         <div class="game-box">
             <div id="game-score">Score: 0</div>
             <div id="game-message">Ready? Start sorting!</div>
-            <div id="game-item">🍎</div>
             
-            <div class="bins">
-                <button class="bin-btn btn-paper" onclick="makeGuess('paper')">Paper</button>
-                <button class="bin-btn btn-plastic" onclick="makeGuess('plastic')">Plastic</button>
-                <button class="bin-btn btn-glass" onclick="makeGuess('glass')">Glass</button>
-                <button class="bin-btn btn-organic" onclick="makeGuess('organic')">Organic</button>
+            <div id="game-play-area">
+                <div id="game-item">🍎</div>
+                
+                <div class="bins">
+                    <button class="bin-btn btn-paper" onclick="makeGuess('paper')">Paper</button>
+                    <button class="bin-btn btn-plastic" onclick="makeGuess('plastic')">Plastic</button>
+                    <button class="bin-btn btn-glass" onclick="makeGuess('glass')">Glass</button>
+                    <button class="bin-btn btn-organic" onclick="makeGuess('organic')">Organic</button>
+                </div>
+            </div>
+
+            <div id="reward-box" class="reward-box">
+                <h3>🏆 Eco-Master Badge Unlocked! 🏆</h3>
+                <p>Congratulations! You are an expert at sorting waste. Thank you for keeping Zalishchyky and our planet clean!</p>
+                <button class="play-again-btn" onclick="resetGame()">Play Again</button>
             </div>
         </div>
     </section>
@@ -291,7 +327,7 @@
 
 <footer>
     <p>"Our project promotes eco-friendly values in school and shows how small actions can help protect the environment and build a better future."</p>
-    <p>&copy; 2024 Sherdyk | UNESCO Partner School Project</p>
+    <p>&copy; 2024 Zalishchyky State Gymnasium | UNESCO Partner School Project</p>
 </footer>
 
 <script>
@@ -338,6 +374,7 @@
 
     // --- MINI GAME LOGIC ---
     let score = 0;
+    const targetScore = 100;
     let currentItem = {};
     
     // Expanded list of items
@@ -354,6 +391,8 @@
     const displayItem = document.getElementById('game-item');
     const scoreDisplay = document.getElementById('game-score');
     const messageDisplay = document.getElementById('game-message');
+    const gamePlayArea = document.getElementById('game-play-area');
+    const rewardBox = document.getElementById('reward-box');
 
     function nextItem() {
         const randomIndex = Math.floor(Math.random() * items.length);
@@ -373,11 +412,30 @@
         }
         scoreDisplay.innerText = "Score: " + score;
         
+        // Check for win condition
+        if (score >= targetScore) {
+            gamePlayArea.style.display = "none";
+            rewardBox.style.display = "block";
+            messageDisplay.innerText = "You did it!";
+            messageDisplay.style.color = "var(--primary-green)";
+            return;
+        }
+
         displayItem.style.transform = "scale(0.5)";
         setTimeout(() => {
             nextItem();
             displayItem.style.transform = "scale(1)";
         }, 200);
+    }
+
+    function resetGame() {
+        score = 0;
+        scoreDisplay.innerText = "Score: " + score;
+        rewardBox.style.display = "none";
+        gamePlayArea.style.display = "block";
+        messageDisplay.innerText = "Ready? Start sorting!";
+        messageDisplay.style.color = "var(--text-dark)";
+        nextItem();
     }
 
     // Initialize when page loads
@@ -388,6 +446,6 @@
 </script>
 
 </body>
-</html>\
-
+</html>
+  
 
