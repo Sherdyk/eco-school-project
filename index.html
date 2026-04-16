@@ -22,7 +22,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -39,17 +38,15 @@
         nav a {
             text-decoration: none;
             color: var(--text-dark);
-            margin: 0 20px;
+            margin: 0 15px;
             font-size: 0.85rem;
             font-weight: 500;
             text-transform: uppercase;
-            letter-spacing: 1px;
             transition: color 0.3s;
         }
 
         nav a:hover { color: var(--primary-green); }
 
-        /* Header / Hero */
         header {
             padding: 150px 20px 100px;
             text-align: center;
@@ -62,13 +59,10 @@
         h1 { font-size: 3rem; color: var(--primary-green); margin: 0; }
         .subtitle { font-size: 1.2rem; opacity: 0.8; }
 
-        /* Main Content */
         .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
-        
         section { padding: 80px 0; border-bottom: 1px solid #eee; }
         h2 { font-size: 2rem; color: var(--primary-green); margin-bottom: 30px; }
 
-        /* Video Box */
         .video-wrapper {
             background: #000;
             border-radius: 20px;
@@ -77,7 +71,6 @@
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
-        /* Grid for Cards */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -93,39 +86,105 @@
             transition: transform 0.3s;
         }
 
-        .card:hover { transform: translateY(-10px); }
+        /* --- HABIT TRACKER STYLES --- */
+        .tracker-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border: 2px solid var(--accent-green);
+        }
 
-        /* Plant Cards */
-        .plant-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            border-radius: 10px;
+        .habit-item {
+            display: flex;
+            align-items: center;
             margin-bottom: 15px;
+            font-size: 1.1rem;
         }
 
-        .red-book-tag {
-            color: #e74c3c;
-            font-size: 0.7rem;
-            font-weight: bold;
-            text-transform: uppercase;
+        .habit-item input {
+            width: 25px;
+            height: 25px;
+            margin-right: 15px;
+            cursor: pointer;
         }
 
-        footer {
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background-color: #eee;
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 20px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background-color: var(--primary-green);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+
+        /* --- GAME STYLES --- */
+        .game-box {
+            background: #f9fbf9;
+            padding: 40px;
+            border-radius: 15px;
             text-align: center;
-            padding: 60px;
-            background: #f1f3f1;
-            font-style: italic;
+            border: 2px dashed var(--primary-green);
         }
+
+        #game-item {
+            font-size: 80px;
+            margin: 20px 0;
+            height: 100px;
+        }
+
+        .bins {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .bin-btn {
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .bin-btn:hover { transform: scale(1.05); }
+        .btn-paper { background: #3498db; }
+        .btn-plastic { background: #f1c40f; color: #333; }
+        .btn-organic { background: #2ecc71; }
+
+        #game-score {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-green);
+            margin-bottom: 10px;
+        }
+
+        #game-message {
+            height: 25px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+
+        footer { text-align: center; padding: 60px; background: #f1f3f1; font-style: italic; }
     </style>
 </head>
 <body>
 
 <nav>
     <a href="#home">Home</a>
-    <a href="#values">Eco Values</a>
-    <a href="#actions">Actions in School</a>
-    <a href="#challenges">Eco Challenges</a>
+    <a href="#tracker">Tracker</a>
+    <a href="#game">Eco Game</a>
+    <a href="#actions">Dniester Canyon</a>
 </nav>
 
 <header id="home">
@@ -137,59 +196,79 @@
     
     <section>
         <h2>Our School and City</h2>
-        <p>This project is about promoting an eco-friendly lifestyle in school. Watch our video to see how we protect nature through daily actions.</p>
+        <p>This project is about promoting an eco-friendly lifestyle. Watch our video to see how we protect nature through daily actions.</p>
         <div class="video-wrapper">
             <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
         </div>
     </section>
 
-    <section id="values">
-        <h2>Main Values</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>Respect for Nature</h3>
-                <p>Understanding that we are part of the ecosystem and must protect it.</p>
+    <section id="tracker">
+        <h2>Daily Eco-Habit Tracker</h2>
+        <p>Tick the boxes when you complete an eco-friendly action. Your progress is saved automatically!</p>
+        
+        <div class="tracker-box">
+            <div class="habit-item">
+                <input type="checkbox" class="habit-cb" onchange="updateTracker()">
+                <label>Used a reusable water bottle today</label>
             </div>
-            <div class="card">
-                <h3>Responsibility</h3>
-                <p>Taking ownership of our waste and daily environmental choices.</p>
+            <div class="habit-item">
+                <input type="checkbox" class="habit-cb" onchange="updateTracker()">
+                <label>Said NO to plastic bags</label>
             </div>
-            <div class="card">
-                <h3>Teamwork</h3>
-                <p>Working together as students and teachers to reach sustainable goals.</p>
+            <div class="habit-item">
+                <input type="checkbox" class="habit-cb" onchange="updateTracker()">
+                <label>Turned off lights when leaving the room</label>
+            </div>
+            <div class="habit-item">
+                <input type="checkbox" class="habit-cb" onchange="updateTracker()">
+                <label>Sorted my trash (Paper/Plastic)</label>
+            </div>
+            <div class="habit-item">
+                <input type="checkbox" class="habit-cb" onchange="updateTracker()">
+                <label>Walked or used eco-transport</label>
+            </div>
+            
+            <p style="margin-top: 20px; font-weight: bold;">Daily Progress:</p>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="game">
+        <h2>Mini-Game: Recycle Master</h2>
+        <p>Test your knowledge! Sort the falling items into the correct bins. Earn 10 points for the right choice, lose 5 for the wrong one.</p>
+        
+        <div class="game-box">
+            <div id="game-score">Score: 0</div>
+            <div id="game-message"></div>
+            <div id="game-item">🍎</div>
+            
+            <div class="bins">
+                <button class="bin-btn btn-paper" onclick="makeGuess('paper')">Paper</button>
+                <button class="bin-btn btn-plastic" onclick="makeGuess('plastic')">Plastic</button>
+                <button class="bin-btn btn-organic" onclick="makeGuess('organic')">Organic</button>
             </div>
         </div>
     </section>
 
     <section id="actions">
-        <h2>Actions in School & Local Nature</h2>
+        <h2>Local Nature: Dniester Canyon</h2>
         <p>We research local biodiversity, specifically the <strong>Dniester Canyon</strong>, one of the natural wonders of Ukraine.</p>
-        
-        <h3>Red Book Plants of Our Region</h3>
         <div class="grid">
             <div class="card">
-                <img src="https://images.unsplash.com/photo-1550159930-4014eb113346?auto=format&fit=crop&q=80&w=400" class="plant-img" alt="Snowdrop">
-                <span class="red-book-tag">Endangered</span>
-                <h4>Snowdrop (Galanthus)</h4>
+                <img src="https://images.unsplash.com/photo-1550159930-4014eb113346?auto=format&fit=crop&q=80&w=400" style="width:100%; border-radius:10px;" alt="Snowdrop">
+                <h4 style="color:red; margin-bottom:0;">Endangered</h4>
+                <h3>Snowdrop (Galanthus)</h3>
                 <p>A delicate flower found in the forests near the canyon. It requires strict protection.</p>
             </div>
             <div class="card">
-                <img src="https://images.unsplash.com/photo-1596272382604-069273f32e92?auto=format&fit=crop&q=80&w=400" class="plant-img" alt="Pulsatilla">
-                <span class="red-book-tag">Endangered</span>
-                <h4>Pulsatilla (Pasqueflower)</h4>
+                <img src="https://images.unsplash.com/photo-1596272382604-069273f32e92?auto=format&fit=crop&q=80&w=400" style="width:100%; border-radius:10px;" alt="Pulsatilla">
+                <h4 style="color:red; margin-bottom:0;">Endangered</h4>
+                <h3>Pulsatilla (Pasqueflower)</h3>
                 <p>Rare species blooming on the sunny slopes of the Dniester Canyon.</p>
             </div>
         </div>
-    </section>
-
-    <section id="challenges">
-        <h2>Eco Challenges</h2>
-        <p>Join our mission! Small actions create a big impact. Here is what you can do:</p>
-        <ul>
-            <li><strong>Zero Waste Week:</strong> Try using no plastic bags for 7 days.</li>
-            <li><strong>Paper Recycling:</strong> Collect and bring old paper to the school collection point.</li>
-            <li><strong>Energy Saver:</strong> Make sure all lights and screens are off after lessons.</li>
-        </ul>
     </section>
 
 </div>
@@ -199,5 +278,82 @@
     <p>&copy; 2024 Sherdyk | UNESCO Partner School Project</p>
 </footer>
 
+<script>
+    // --- HABIT TRACKER LOGIC ---
+    const checkboxes = document.querySelectorAll('.habit-cb');
+    const progressBar = document.getElementById('progress-fill');
+
+    function updateTracker() {
+        let checkedCount = 0;
+        checkboxes.forEach((cb, index) => {
+            localStorage.setItem('eco_habit_' + index, cb.checked);
+            if (cb.checked) checkedCount++;
+        });
+        const percentage = (checkedCount / checkboxes.length) * 100;
+        progressBar.style.width = percentage + '%';
+    }
+
+    function loadTracker() {
+        checkboxes.forEach((cb, index) => {
+            const savedState = localStorage.getItem('eco_habit_' + index);
+            if (savedState === 'true') cb.checked = true;
+        });
+        updateTracker();
+    }
+
+    // --- MINI GAME LOGIC ---
+    let score = 0;
+    let currentItem = {};
+    
+    const items = [
+        { emoji: '🍎', type: 'organic' },
+        { emoji: '🍌', type: 'organic' },
+        { emoji: '🍂', type: 'organic' },
+        { emoji: '📰', type: 'paper' },
+        { emoji: '📦', type: 'paper' },
+        { emoji: '📄', type: 'paper' },
+        { emoji: '🥤', type: 'plastic' },
+        { emoji: '🛍️', type: 'plastic' },
+        { emoji: '🧴', type: 'plastic' }
+    ];
+
+    const displayItem = document.getElementById('game-item');
+    const scoreDisplay = document.getElementById('game-score');
+    const messageDisplay = document.getElementById('game-message');
+
+    function nextItem() {
+        const randomIndex = Math.floor(Math.random() * items.length);
+        currentItem = items[randomIndex];
+        displayItem.innerText = currentItem.emoji;
+    }
+
+    function makeGuess(guessedType) {
+        if (guessedType === currentItem.type) {
+            score += 10;
+            messageDisplay.innerText = "Correct! +10";
+            messageDisplay.style.color = "#2ecc71";
+        } else {
+            score -= 5;
+            messageDisplay.innerText = "Oops! That goes in " + currentItem.type;
+            messageDisplay.style.color = "#e74c3c";
+        }
+        scoreDisplay.innerText = "Score: " + score;
+        
+        // Slightly animate the item
+        displayItem.style.transform = "scale(0.5)";
+        setTimeout(() => {
+            nextItem();
+            displayItem.style.transform = "scale(1)";
+        }, 200);
+    }
+
+    // Run when page loads
+    window.onload = () => {
+        loadTracker();
+        nextItem();
+    };
+</script>
+
 </body>
 </html>
+
