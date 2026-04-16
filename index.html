@@ -11,8 +11,10 @@
             --soft-white: #fcfdfc;
             --text-dark: #2d3436;
             --accent-green: #8fb9a8;
+            --active-tab: #e8f5e9;
         }
 
+        /* Универсальный фикс для мобильных */
         * { box-sizing: border-box; }
 
         body {
@@ -21,10 +23,14 @@
             background-color: var(--soft-white);
             color: var(--text-dark);
             line-height: 1.8;
-            padding-top: 100px;
+            padding-top: 110px; /* Увеличили отступ для мобильного меню */
         }
 
-        /* --- NAVIGATION (MOBILE FRIENDLY) --- */
+        @media (min-width: 600px) {
+            body { padding-top: 80px; }
+        }
+
+        /* --- NAVIGATION (FIXED FOR MOBILE) --- */
         nav {
             position: fixed;
             top: 0;
@@ -33,36 +39,37 @@
             backdrop-filter: blur(10px);
             display: flex;
             justify-content: center;
-            flex-wrap: wrap; 
-            padding: 10px;
+            flex-wrap: wrap; /* Позволяет кнопкам переноситься */
+            padding: 10px 0;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             z-index: 1000;
-            gap: 5px;
         }
 
         nav button {
             background: none;
             border: none;
             color: var(--text-dark);
-            padding: 10px 15px;
-            font-size: 0.75rem;
+            margin: 5px; /* Чуть меньше отступы */
+            padding: 8px 12px;
+            font-size: 0.8rem; /* Чуть меньше шрифт для мобилок */
             font-weight: 700;
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s ease;
-            border-radius: 20px;
-            flex: 1 1 calc(45% - 10px); /* 2 columns on small screens */
-            max-width: 150px;
-            text-align: center;
+            border-radius: 25px;
+            font-family: 'Montserrat', sans-serif;
         }
 
         @media (min-width: 600px) {
             nav button {
-                flex: 0 1 auto;
-                font-size: 0.85rem;
-                max-width: none;
+                font-size: 0.9rem;
+                padding: 10px 20px;
+                margin: 0 10px;
             }
-            body { padding-top: 80px; }
+        }
+
+        nav button:hover {
+            color: var(--primary-green);
         }
 
         nav button.active-nav {
@@ -70,19 +77,23 @@
             color: white;
         }
 
-        /* --- CONTENT SECTIONS --- */
+        /* --- TAB CONTENT SECTIONS --- */
         .tab-content {
             display: none;
             animation: fadeIn 0.4s ease-in-out;
+            min-height: 80vh;
         }
 
-        .tab-content.active { display: block; }
+        .tab-content.active {
+            display: block;
+        }
 
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* --- HEADER & TYPOGRAPHY --- */
         header {
             padding: 60px 20px;
             text-align: center;
@@ -90,18 +101,23 @@
                         url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Dniester_Canyon.jpg/1200px-Dniester_Canyon.jpg');
             background-size: cover;
             background-position: center;
+            border-bottom: 1px solid #eee;
         }
 
-        h1 { font-size: 2.2rem; color: var(--primary-green); margin: 0; }
-        h2 { font-size: 1.8rem; color: var(--primary-green); margin-bottom: 20px; text-align: center;}
+        h1 { font-size: 2.5rem; color: var(--primary-green); margin: 0; }
+        .subtitle { font-size: 1.1rem; opacity: 0.8; }
+        h2 { font-size: 1.8rem; color: var(--primary-green); margin-bottom: 30px; text-align: center;}
 
         .container { max-width: 1000px; margin: 0 auto; padding: 20px; }
 
+        /* --- IMAGES & CARDS --- */
         .zalishchyky-photo {
             width: 100%;
             border-radius: 15px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.1);
             margin: 20px 0;
+            object-fit: cover;
+            max-height: 400px;
         }
 
         .video-wrapper {
@@ -110,9 +126,24 @@
             overflow: hidden;
             aspect-ratio: 16/9;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-top: 30px;
         }
 
-        /* --- GAME STYLES (BACK TO GREEN STYLE) --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #f0f0f0;
+        }
+
+        /* --- GAME STYLES (ORIGINAL GREEN) --- */
         .game-box {
             background: #f9fbf9;
             padding: 30px;
@@ -124,36 +155,40 @@
         .game-stats {
             display: flex;
             justify-content: space-around;
-            flex-wrap: wrap;
             background: #e8f5e9;
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 20px;
             font-weight: bold;
             color: var(--primary-green);
+            font-size: 1rem;
+            flex-wrap: wrap;
             gap: 10px;
         }
 
-        #game-item { font-size: 80px; margin: 20px 0; height: 100px; }
+        #game-item {
+            font-size: 80px;
+            margin: 20px 0;
+            height: 100px;
+            user-select: none;
+        }
 
         .bins {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+            display: flex;
+            justify-content: center;
             gap: 10px;
-        }
-
-        @media (min-width: 600px) {
-            .bins { display: flex; justify-content: center; }
+            flex-wrap: wrap;
         }
 
         .bin-btn {
-            padding: 15px;
+            padding: 12px 20px;
             font-size: 0.9rem;
             font-weight: bold;
             color: white;
             border: none;
             border-radius: 8px;
             cursor: pointer;
+            transition: transform 0.2s;
         }
 
         .btn-paper { background: #3498db; }
@@ -161,21 +196,19 @@
         .btn-organic { background: #2ecc71; }
         .btn-glass { background: #95a5a6; }
 
-        #game-message { height: 25px; font-weight: bold; margin-bottom: 20px; }
+        #game-message {
+            height: 25px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
 
-        /* --- TRACKER & CARDS --- */
+        /* --- HABIT TRACKER --- */
         .tracker-box {
             background: white;
-            padding: 25px;
+            padding: 30px;
             border-radius: 15px;
             border: 2px solid var(--accent-green);
         }
-
-        .habit-item { display: flex; align-items: center; margin-bottom: 15px; }
-        .habit-item input { width: 22px; height: 22px; margin-right: 12px; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        .card { background: white; padding: 25px; border-radius: 15px; border: 1px solid #f0f0f0; }
 
         footer { text-align: center; padding: 40px; background: #f1f3f1; font-style: italic; }
     </style>
@@ -183,20 +216,20 @@
 <body>
 
 <nav>
-    <button class="nav-btn active-nav" onclick="openTab('tab-home', this)">About Us</button>
-    <button class="nav-btn" onclick="openTab('tab-tracker', this)">Habit Tracker</button>
+    <button class="nav-btn active-nav" onclick="openTab('tab-home', this)">Home & About</button>
+    <button class="nav-btn" onclick="openTab('tab-tracker', this)">Daily Tracker</button>
     <button class="nav-btn" onclick="openTab('tab-game', this)">Eco Game</button>
-    <button class="nav-btn" onclick="openTab('tab-actions', this)">Nature</button>
+    <button class="nav-btn" onclick="openTab('tab-actions', this)">Local Nature</button>
 </nav>
 
 <div id="tab-home" class="tab-content active">
     <header>
         <h1>Eco-Style Life</h1>
-        <p>Zalishchyky State Gymnasium | UNESCO Project</p>
+        <p class="subtitle">UNESCO Sustainable Development Project</p>
     </header>
     <div class="container">
-        <h2>Our Beautiful Hometown</h2>
-        <p>Zalishchyky is a unique town located on a peninsula, surrounded by the Dniester River. Our school works hard to promote sustainable development and protect this natural wonder.</p>
+        <h2>Our School and Beautiful Zalishchyky</h2>
+        <p>Welcome to the <strong>Zalishchyky State Gymnasium</strong>! We are proud to lead this eco-project from our incredible hometown.</p>
         <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Zalishchyky_panorama.jpg/1200px-Zalishchyky_panorama.jpg" alt="Zalishchyky" class="zalishchyky-photo">
         <div class="video-wrapper">
             <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
@@ -208,14 +241,14 @@
     <div class="container">
         <h2>Daily Eco-Habit Tracker</h2>
         <div class="tracker-box">
-            <p id="tracker-date" style="font-weight: bold; color: var(--primary-green); text-align:center;">Date: --</p>
-            <div class="habit-item"><input type="checkbox" class="habit-cb" onchange="updateTracker()"><label>Used a reusable bottle</label></div>
-            <div class="habit-item"><input type="checkbox" class="habit-cb" onchange="updateTracker()"><label>Said no to plastic bags</label></div>
-            <div class="habit-item"><input type="checkbox" class="habit-cb" onchange="updateTracker()"><label>Turned off lights</label></div>
-            <div class="habit-item"><input type="checkbox" class="habit-cb" onchange="updateTracker()"><label>Sorted my trash</label></div>
-            <div class="habit-item"><input type="checkbox" class="habit-cb" onchange="updateTracker()"><label>Used eco-transport</label></div>
+            <p id="tracker-date" style="text-align:center; font-weight:bold; color:var(--primary-green);"></p>
+            <div class="habit-item"><input type="checkbox" class="habit-cb" onchange="updateTracker()"> <label>Used a reusable water bottle</label></div>
+            <div class="habit-item"><input type="checkbox" class="habit-cb" onchange="updateTracker()"> <label>No single-use plastic bags</label></div>
+            <div class="habit-item"><input type="checkbox" class="habit-cb" onchange="updateTracker()"> <label>Turned off lights</label></div>
+            <div class="habit-item"><input type="checkbox" class="habit-cb" onchange="updateTracker()"> <label>Sorted my trash</label></div>
+            <div class="habit-item"><input type="checkbox" class="habit-cb" onchange="updateTracker()"> <label>Walked or used eco-transport</label></div>
             <div style="background:#eee; height:15px; border-radius:10px; margin-top:20px; overflow:hidden;">
-                <div id="progress-fill" style="background:var(--primary-green); width:0%; height:100%; transition:0.4s;"></div>
+                <div id="progress-fill" style="background:var(--primary-green); width:0%; height:100%; transition:0.5s;"></div>
             </div>
         </div>
     </div>
@@ -223,15 +256,15 @@
 
 <div id="tab-game" class="tab-content">
     <div class="container">
-        <h2>Recycle Master: Hardcore Mode</h2>
-        <p style="text-align:center; font-size:0.9rem; color:red;">Warning: One mistake resets your score to zero!</p>
+        <h2>Mini-Game: Recycle Master</h2>
+        <p style="text-align:center; color:red; font-weight:bold;">Be careful! One mistake resets your score to 0!</p>
         <div class="game-box">
             <div class="game-stats">
                 <div id="game-score">Score: 0</div>
                 <div id="game-highscore">High Score: 0</div>
-                <div id="game-rank">Rank: Novice</div>
+                <div id="game-rank">Rank: 👶 Novice</div>
             </div>
-            <div id="game-message">Start Sorting!</div>
+            <div id="game-message">Start sorting!</div>
             <div id="game-item">🍎</div>
             <div class="bins">
                 <button class="bin-btn btn-paper" onclick="makeGuess('paper')">Paper</button>
@@ -245,17 +278,17 @@
 
 <div id="tab-actions" class="tab-content">
     <div class="container">
-        <h2>Dniester Canyon Flora</h2>
+        <h2>Local Nature: Dniester Canyon</h2>
         <div class="grid">
             <div class="card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Galanthus_nivalis.jpg/800px-Galanthus_nivalis.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:10px;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Galanthus_nivalis.jpg/800px-Galanthus_nivalis.jpg" style="width:100%; border-radius:10px;">
                 <h3>Snowdrop</h3>
-                <p>A delicate endangered flower found in our local forests.</p>
+                <p>Protected endangered flower of our region.</p>
             </div>
             <div class="card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Pulsatilla_grandis_02.jpg/800px-Pulsatilla_grandis_02.jpg" style="width:100%; height:180px; object-fit:cover; border-radius:10px;">
-                <h3>Pasqueflower</h3>
-                <p>A rare species blooming on the sunny canyon slopes.</p>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Pulsatilla_grandis_02.jpg/800px-Pulsatilla_grandis_02.jpg" style="width:100%; border-radius:10px;">
+                <h3>Pulsatilla</h3>
+                <p>Rare flora blooming on the canyon slopes.</p>
             </div>
         </div>
     </div>
@@ -266,16 +299,15 @@
 </footer>
 
 <script>
-    // TABS
     function openTab(tabId, btn) {
         document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
         document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active-nav'));
         document.getElementById(tabId).classList.add('active');
         btn.classList.add('active-nav');
-        window.scrollTo(0,0);
+        window.scrollTo(0, 0);
     }
 
-    // TRACKER
+    // Tracker Logic
     function updateTracker() {
         const cbs = document.querySelectorAll('.habit-cb');
         let checked = 0;
@@ -283,43 +315,44 @@
         document.getElementById('progress-fill').style.width = (checked/cbs.length*100) + '%';
     }
 
-    // GAME
+    // Game Logic
     let score = 0;
-    let highScore = localStorage.getItem('eco_highscore') || 0;
+    let highScore = localStorage.getItem('zal_eco_highscore') || 0;
     let currentItem = {};
     const items = [
-        {e:'🍎', t:'organic'}, {e:'📦', t:'paper'}, {e:'🥤', t:'plastic'}, {e:'🍾', t:'glass'},
-        {e:'🍌', t:'organic'}, {e:'📰', t:'paper'}, {e:'🛍️', t:'plastic'}, {e:'🫙', t:'glass'}
+        { e: '🍎', t: 'organic' }, { e: '🍌', t: 'organic' }, { e: '📰', t: 'paper' }, 
+        { e: '📦', t: 'paper' }, { e: '🥤', t: 'plastic' }, { e: '🛍️', t: 'plastic' }, 
+        { e: '🍾', t: 'glass' }, { e: '🫙', t: 'glass' }
     ];
 
     function nextItem() {
-        currentItem = items[Math.floor(Math.random()*items.length)];
+        currentItem = items[Math.floor(Math.random() * items.length)];
         document.getElementById('game-item').innerText = currentItem.e;
     }
 
     function makeGuess(type) {
         const msg = document.getElementById('game-message');
-        if(type === currentItem.type) {
+        if (type === currentItem.t) {
             score += 10;
             msg.innerText = "Correct! +10";
             msg.style.color = "#2ecc71";
         } else {
             score = 0; // HARDCORE RESET
-            msg.innerText = "WRONG! Score Reset!";
+            msg.innerText = "WRONG! Score reset to 0!";
             msg.style.color = "#e74c3c";
         }
 
-        if(score > highScore) {
+        if (score > highScore) {
             highScore = score;
-            localStorage.setItem('eco_highscore', highScore);
+            localStorage.setItem('zal_eco_highscore', highScore);
         }
-        
+
         document.getElementById('game-score').innerText = "Score: " + score;
         document.getElementById('game-highscore').innerText = "High Score: " + highScore;
         
-        let rank = "Novice";
-        if(score >= 50) rank = "Eco-Warrior";
-        if(score >= 120) rank = "Planet Savior";
+        let rank = "👶 Novice";
+        if(score >= 50) rank = "🌱 Eco-Warrior";
+        if(score >= 100) rank = "🏆 Master";
         document.getElementById('game-rank').innerText = "Rank: " + rank;
 
         nextItem();
@@ -331,8 +364,7 @@
         nextItem();
     };
 </script>
+
 </body>
 </html>
-
- 
  
