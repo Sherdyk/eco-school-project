@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eco-Style Life | School Project</title>
+    <title>Eco-Style Life | Zalishchyky Gymnasium</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -11,6 +11,7 @@
             --soft-white: #fcfdfc;
             --text-dark: #2d3436;
             --accent-green: #8fb9a8;
+            --active-tab: #e8f5e9;
         }
 
         body {
@@ -19,49 +20,89 @@
             background-color: var(--soft-white);
             color: var(--text-dark);
             line-height: 1.8;
-            scroll-behavior: smooth;
+            padding-top: 80px; /* Space for fixed nav */
         }
 
+        /* --- NAVIGATION (TABS) --- */
         nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(10px);
             display: flex;
             justify-content: center;
-            padding: 20px 0;
+            padding: 15px 0;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             z-index: 1000;
         }
 
-        nav a {
-            text-decoration: none;
+        nav button {
+            background: none;
+            border: none;
             color: var(--text-dark);
-            margin: 0 15px;
-            font-size: 0.85rem;
-            font-weight: 500;
+            margin: 0 10px;
+            padding: 10px 20px;
+            font-size: 0.9rem;
+            font-weight: 700;
             text-transform: uppercase;
-            transition: color 0.3s;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 25px;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        nav a:hover { color: var(--primary-green); }
+        nav button:hover {
+            color: var(--primary-green);
+        }
 
+        nav button.active-nav {
+            background-color: var(--primary-green);
+            color: white;
+        }
+
+        /* --- TAB CONTENT SECTIONS --- */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.4s ease-in-out;
+            min-height: 80vh;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* --- HEADER & TYPOGRAPHY --- */
         header {
-            padding: 150px 20px 100px;
+            padding: 80px 20px;
             text-align: center;
-            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), 
+            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.9)), 
                         url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Dniester_Canyon.jpg/1200px-Dniester_Canyon.jpg');
             background-size: cover;
             background-position: center;
+            border-bottom: 1px solid #eee;
         }
 
         h1 { font-size: 3rem; color: var(--primary-green); margin: 0; }
         .subtitle { font-size: 1.2rem; opacity: 0.8; }
+        h2 { font-size: 2rem; color: var(--primary-green); margin-bottom: 30px; text-align: center;}
 
-        .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
-        section { padding: 80px 0; border-bottom: 1px solid #eee; }
-        h2 { font-size: 2rem; color: var(--primary-green); margin-bottom: 30px; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+
+        /* --- ABOUT US & MEDIA --- */
+        .zalishchyky-photo {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            margin: 20px 0;
+            object-fit: cover;
+            max-height: 400px;
+        }
 
         .video-wrapper {
             background: #000;
@@ -69,6 +110,7 @@
             overflow: hidden;
             aspect-ratio: 16/9;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            margin-top: 30px;
         }
 
         .grid {
@@ -85,6 +127,8 @@
             border: 1px solid #f0f0f0;
             transition: transform 0.3s;
         }
+
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
 
         /* --- HABIT TRACKER STYLES --- */
         .tracker-box {
@@ -142,6 +186,18 @@
             border: 2px dashed var(--primary-green);
         }
 
+        .game-stats {
+            display: flex;
+            justify-content: space-around;
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: var(--primary-green);
+            font-size: 1.2rem;
+        }
+
         #game-item {
             font-size: 80px;
             margin: 20px 0;
@@ -173,76 +229,47 @@
         .btn-organic { background: #2ecc71; }
         .btn-glass { background: #95a5a6; }
 
-        #game-score {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: var(--primary-green);
-            margin-bottom: 10px;
-        }
-
         #game-message {
             height: 25px;
             font-weight: bold;
             margin-bottom: 20px;
+            font-size: 1.1rem;
         }
 
-        .reward-box {
-            background: #fff3cd;
-            border: 2px solid #ffeeba;
-            padding: 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            display: none;
-        }
-
-        .reward-box h3 {
-            color: #856404;
-            margin-top: 0;
-        }
-
-        .play-again-btn {
-            background-color: var(--primary-green);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 10px;
-        }
-
-        footer { text-align: center; padding: 60px; background: #f1f3f1; font-style: italic; }
+        footer { text-align: center; padding: 40px; background: #f1f3f1; font-style: italic; border-top: 1px solid #ddd; }
     </style>
 </head>
 <body>
 
 <nav>
-    <a href="#home">Home</a>
-    <a href="#about">About Us</a>
-    <a href="#tracker">Daily Tracker</a>
-    <a href="#game">Eco Game</a>
-    <a href="#actions">Dniester Canyon</a>
+    <button class="nav-btn active-nav" onclick="openTab('tab-home', this)">Home & About</button>
+    <button class="nav-btn" onclick="openTab('tab-tracker', this)">Daily Tracker</button>
+    <button class="nav-btn" onclick="openTab('tab-game', this)">Eco Game</button>
+    <button class="nav-btn" onclick="openTab('tab-actions', this)">Local Nature</button>
 </nav>
 
-<header id="home">
-    <h1>Eco-Style Life in School</h1>
-    <p class="subtitle">UNESCO Sustainable Development Project</p>
-</header>
-
-<div class="container">
-    
-    <section id="about">
+<div id="tab-home" class="tab-content active">
+    <header>
+        <h1>Eco-Style Life</h1>
+        <p class="subtitle">UNESCO Sustainable Development Project</p>
+    </header>
+    <div class="container">
         <h2>Our School and Beautiful Zalishchyky</h2>
         <p>Welcome to the <strong>Zalishchyky State Gymnasium</strong>! We are proud to lead this eco-project from our incredible hometown. Zalishchyky is a unique and picturesque city, famously situated on a peninsula formed by a sweeping meander of the Dniester River. Surrounded by such spectacular nature, we feel a deep responsibility to protect our environment.</p>
+        
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Zalishchyky_panorama.jpg/1200px-Zalishchyky_panorama.jpg" alt="Zalishchyky Dniester Meander" class="zalishchyky-photo">
+        
         <p>This project is designed to promote an eco-friendly lifestyle. Watch our video to see how we protect nature through daily actions.</p>
         <div class="video-wrapper">
             <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
         </div>
-    </section>
+    </div>
+</div>
 
-    <section id="tracker">
+<div id="tab-tracker" class="tab-content">
+    <div class="container">
         <h2>Daily Eco-Habit Tracker</h2>
-        <p>Tick the boxes when you complete an eco-friendly action. <strong>This tracker resets automatically every night at midnight!</strong></p>
+        <p style="text-align:center;">Tick the boxes when you complete an eco-friendly action. <strong>This tracker resets automatically every night at midnight!</strong></p>
         
         <div class="tracker-box">
             <div class="tracker-header">
@@ -275,14 +302,22 @@
                 <div class="progress-fill" id="progress-fill"></div>
             </div>
         </div>
-    </section>
+    </div>
+</div>
 
-    <section id="game">
+<div id="tab-game" class="tab-content">
+    <div class="container">
         <h2>Mini-Game: Recycle Master</h2>
-        <p>Sort the items into the correct bins. Earn 10 points for the right choice, lose 5 for the wrong one. <strong>Reach 100 points to earn your Eco-Master Badge!</strong></p>
+        <p style="text-align:center;">Sort the items into the correct bins. Earn 10 points for the right choice, lose 5 for the wrong one. <strong>Compete to increase your Rank and beat the High Score!</strong></p>
         
         <div class="game-box">
-            <div id="game-score">Score: 0</div>
+            
+            <div class="game-stats">
+                <div id="game-score">Score: 0</div>
+                <div id="game-highscore">High Score: 0</div>
+                <div id="game-rank">Rank: 👶 Novice</div>
+            </div>
+
             <div id="game-message">Ready? Start sorting!</div>
             
             <div id="game-play-area">
@@ -295,18 +330,14 @@
                     <button class="bin-btn btn-organic" onclick="makeGuess('organic')">Organic</button>
                 </div>
             </div>
-
-            <div id="reward-box" class="reward-box">
-                <h3>🏆 Eco-Master Badge Unlocked! 🏆</h3>
-                <p>Congratulations! You are an expert at sorting waste. Thank you for keeping Zalishchyky and our planet clean!</p>
-                <button class="play-again-btn" onclick="resetGame()">Play Again</button>
-            </div>
         </div>
-    </section>
+    </div>
+</div>
 
-    <section id="actions">
+<div id="tab-actions" class="tab-content">
+    <div class="container">
         <h2>Local Nature: Dniester Canyon</h2>
-        <p>We research local biodiversity, specifically the <strong>Dniester Canyon</strong>, one of the natural wonders of Ukraine.</p>
+        <p style="text-align:center;">We research local biodiversity, specifically the <strong>Dniester Canyon</strong>, one of the natural wonders of Ukraine.</p>
         <div class="grid">
             <div class="card">
                 <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Galanthus_nivalis.jpg/800px-Galanthus_nivalis.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:10px;" alt="Snowdrop">
@@ -321,8 +352,7 @@
                 <p>Rare species blooming on the sunny slopes of the Dniester Canyon.</p>
             </div>
         </div>
-    </section>
-
+    </div>
 </div>
 
 <footer>
@@ -331,6 +361,24 @@
 </footer>
 
 <script>
+    // --- TAB SWITCHING LOGIC ---
+    function openTab(tabId, btnElement) {
+        // Hide all tabs
+        const tabs = document.querySelectorAll('.tab-content');
+        tabs.forEach(tab => tab.classList.remove('active'));
+
+        // Remove active class from all buttons
+        const btns = document.querySelectorAll('.nav-btn');
+        btns.forEach(btn => btn.classList.remove('active-nav'));
+
+        // Show target tab and highlight button
+        document.getElementById(tabId).classList.add('active');
+        btnElement.classList.add('active-nav');
+        
+        // Scroll to top
+        window.scrollTo(0, 0);
+    }
+
     // --- DAILY HABIT TRACKER LOGIC ---
     const checkboxes = document.querySelectorAll('.habit-cb');
     const progressBar = document.getElementById('progress-fill');
@@ -338,12 +386,11 @@
     const dateDisplay = document.getElementById('tracker-date');
 
     function checkDailyReset() {
-        const today = new Date().toLocaleDateString('en-GB'); // Format: DD/MM/YYYY
+        const today = new Date().toLocaleDateString('en-GB'); 
         dateDisplay.innerText = "Date: " + today;
         
         const savedDate = localStorage.getItem('tracker_date');
 
-        // If it's a new day, clear everything
         if (savedDate !== today) {
             checkboxes.forEach((cb, i) => {
                 localStorage.removeItem('eco_habit_' + i);
@@ -351,7 +398,6 @@
             });
             localStorage.setItem('tracker_date', today);
         } else {
-            // Otherwise, load today's saved progress
             checkboxes.forEach((cb, i) => {
                 const savedState = localStorage.getItem('eco_habit_' + i);
                 if (savedState === 'true') cb.checked = true;
@@ -374,10 +420,9 @@
 
     // --- MINI GAME LOGIC ---
     let score = 0;
-    const targetScore = 100;
+    let highScore = localStorage.getItem('zal_eco_highscore') || 0;
     let currentItem = {};
     
-    // Expanded list of items
     const items = [
         { emoji: '🍎', type: 'organic' }, { emoji: '🍌', type: 'organic' }, { emoji: '🍂', type: 'organic' }, 
         { emoji: '🍉', type: 'organic' }, { emoji: '🥕', type: 'organic' },
@@ -390,9 +435,23 @@
 
     const displayItem = document.getElementById('game-item');
     const scoreDisplay = document.getElementById('game-score');
+    const highScoreDisplay = document.getElementById('game-highscore');
+    const rankDisplay = document.getElementById('game-rank');
     const messageDisplay = document.getElementById('game-message');
-    const gamePlayArea = document.getElementById('game-play-area');
-    const rewardBox = document.getElementById('reward-box');
+
+    function getRank(points) {
+        if (points >= 150) return "🌍 Planet Savior";
+        if (points >= 100) return "🏆 Master Recycler";
+        if (points >= 50) return "🌱 Eco-Warrior";
+        if (points >= 20) return "♻️ Learner";
+        return "👶 Novice";
+    }
+
+    function updateStatsDisplay() {
+        scoreDisplay.innerText = "Score: " + score;
+        highScoreDisplay.innerText = "High Score: " + highScore;
+        rankDisplay.innerText = "Rank: " + getRank(score);
+    }
 
     function nextItem() {
         const randomIndex = Math.floor(Math.random() * items.length);
@@ -407,20 +466,20 @@
             messageDisplay.style.color = "#2ecc71";
         } else {
             score -= 5;
+            if(score < 0) score = 0; // Don't let score go below 0
             messageDisplay.innerText = "Oops! That goes in " + currentItem.type;
             messageDisplay.style.color = "#e74c3c";
         }
-        scoreDisplay.innerText = "Score: " + score;
-        
-        // Check for win condition
-        if (score >= targetScore) {
-            gamePlayArea.style.display = "none";
-            rewardBox.style.display = "block";
-            messageDisplay.innerText = "You did it!";
-            messageDisplay.style.color = "var(--primary-green)";
-            return;
+
+        // Update High Score
+        if (score > highScore) {
+            highScore = score;
+            localStorage.setItem('zal_eco_highscore', highScore);
         }
 
+        updateStatsDisplay();
+        
+        // Animation effect
         displayItem.style.transform = "scale(0.5)";
         setTimeout(() => {
             nextItem();
@@ -428,24 +487,14 @@
         }, 200);
     }
 
-    function resetGame() {
-        score = 0;
-        scoreDisplay.innerText = "Score: " + score;
-        rewardBox.style.display = "none";
-        gamePlayArea.style.display = "block";
-        messageDisplay.innerText = "Ready? Start sorting!";
-        messageDisplay.style.color = "var(--text-dark)";
-        nextItem();
-    }
-
     // Initialize when page loads
     window.onload = () => {
         checkDailyReset();
+        updateStatsDisplay();
         nextItem();
     };
 </script>
 
 </body>
 </html>
-  
-
+ 
