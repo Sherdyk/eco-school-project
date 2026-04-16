@@ -1,100 +1,111 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eco-Style Life | Sherdyk Project</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <title>Eco-Style Life | School Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
-        /* Мінімалістичні стилі */
+        :root {
+            --primary-green: #4a6741;
+            --soft-white: #fcfdfc;
+            --text-dark: #2d3436;
+            --accent-green: #8fb9a8;
+        }
+
         body {
             font-family: 'Montserrat', sans-serif;
             margin: 0;
-            padding: 0;
-            background-color: #f9fbf9;
-            color: #333;
-            line-height: 1.6;
+            background-color: var(--soft-white);
+            color: var(--text-dark);
+            line-height: 1.8;
+            scroll-behavior: smooth;
         }
 
-        header {
-            background-color: #4a6741;
-            color: white;
-            padding: 80px 20px;
-            text-align: center;
-        }
-
+        /* Navigation */
         nav {
-            background: white;
-            padding: 15px;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
             display: flex;
             justify-content: center;
-            gap: 20px;
-            position: sticky;
-            top: 0;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            z-index: 100;
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
         }
 
         nav a {
             text-decoration: none;
-            color: #4a6741;
-            font-weight: bold;
-            font-size: 0.9rem;
+            color: var(--text-dark);
+            margin: 0 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
         }
 
-        .container {
-            max-width: 800px;
-            margin: 40px auto;
-            padding: 0 20px;
+        nav a:hover { color: var(--primary-green); }
+
+        /* Header / Hero */
+        header {
+            padding: 150px 20px 100px;
+            text-align: center;
+            background: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), 
+                        url('https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?auto=format&fit=crop&q=80&w=1600');
+            background-size: cover;
+            background-position: center;
         }
 
-        section { margin-bottom: 60px; }
+        h1 { font-size: 3rem; color: var(--primary-green); margin: 0; }
+        .subtitle { font-size: 1.2rem; opacity: 0.8; }
 
-        h2 {
-            color: #4a6741;
-            border-bottom: 2px solid #e0eee0;
-            padding-bottom: 10px;
-        }
+        /* Main Content */
+        .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; }
+        
+        section { padding: 80px 0; border-bottom: 1px solid #eee; }
+        h2 { font-size: 2rem; color: var(--primary-green); margin-bottom: 30px; }
 
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
+        /* Video Box */
+        .video-wrapper {
+            background: #000;
+            border-radius: 20px;
             overflow: hidden;
-            border-radius: 12px;
-            background: #eee;
+            aspect-ratio: 16/9;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
 
-        .video-container iframe {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            border: 0;
-        }
-
+        /* Grid for Cards */
         .grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
         }
 
         .card {
             background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-            border: 1px solid #eee;
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid #f0f0f0;
+            transition: transform 0.3s;
         }
 
-        .card img {
+        .card:hover { transform: translateY(-10px); }
+
+        /* Plant Cards */
+        .plant-img {
             width: 100%;
             height: 200px;
             object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 15px;
         }
 
-        .card-content { padding: 20px; }
-
-        .tag {
-            color: #d63031;
+        .red-book-tag {
+            color: #e74c3c;
             font-size: 0.7rem;
             font-weight: bold;
             text-transform: uppercase;
@@ -102,69 +113,90 @@
 
         footer {
             text-align: center;
-            padding: 40px;
-            background: #eee;
-            font-size: 0.8rem;
-            color: #777;
+            padding: 60px;
+            background: #f1f3f1;
+            font-style: italic;
         }
     </style>
 </head>
 <body>
 
 <nav>
-    <a href="#about">Школа</a>
-    <a href="#canyon">Каньйон</a>
-    <a href="#plants">Рослини</a>
+    <a href="#home">Home</a>
+    <a href="#values">Eco Values</a>
+    <a href="#actions">Actions in School</a>
+    <a href="#challenges">Eco Challenges</a>
 </nav>
 
-<header>
+<header id="home">
     <h1>Eco-Style Life in School</h1>
-    <p>Проєкт про майбутнє та екологічні цінності</p>
+    <p class="subtitle">UNESCO Sustainable Development Project</p>
 </header>
 
 <div class="container">
     
-    <section id="about">
-        <h2>Про нашу школу та місто</h2>
-        <p>Ми впроваджуємо екологічні звички щодня. Ось наше відео:</p>
-        <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" allowfullscreen></iframe>
+    <section>
+        <h2>Our School and City</h2>
+        <p>This project is about promoting an eco-friendly lifestyle in school. Watch our video to see how we protect nature through daily actions.</p>
+        <div class="video-wrapper">
+            <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
         </div>
     </section>
 
-    <section id="canyon">
-        <h2>Дністровський каньйон</h2>
-        <p>Наш край славиться унікальною природою Дністровського каньйону. Ми прагнемо зберегти цю красу для майбутніх поколінь.</p>
-    </section>
-
-    <section id="plants">
-        <h2>Червона книга нашої місцевості</h2>
+    <section id="values">
+        <h2>Main Values</h2>
         <div class="grid">
             <div class="card">
-                <img src="https://images.unsplash.com/photo-1550159930-4014eb113346?auto=format&fit=crop&q=80&w=400" alt="Підсніжник">
-                <div class="card-content">
-                    <span class="tag">Охороняється</span>
-                    <h3>Підсніжник білосніжний</h3>
-                    <p>Рідкісна квітка, що росте в лісах каньйону.</p>
-                </div>
+                <h3>Respect for Nature</h3>
+                <p>Understanding that we are part of the ecosystem and must protect it.</p>
             </div>
-            
             <div class="card">
-                <img src="https://images.unsplash.com/photo-1596272382604-069273f32e92?auto=format&fit=crop&q=80&w=400" alt="Сон-трава">
-                <div class="card-content">
-                    <span class="tag">Рідкісний вид</span>
-                    <h3>Сон великий</h3>
-                    <p>Цвіте на сонячних схилах нашої місцевості.</p>
-                </div>
+                <h3>Responsibility</h3>
+                <p>Taking ownership of our waste and daily environmental choices.</p>
+            </div>
+            <div class="card">
+                <h3>Teamwork</h3>
+                <p>Working together as students and teachers to reach sustainable goals.</p>
             </div>
         </div>
+    </section>
+
+    <section id="actions">
+        <h2>Actions in School & Local Nature</h2>
+        <p>We research local biodiversity, specifically the <strong>Dniester Canyon</strong>, one of the natural wonders of Ukraine.</p>
+        
+        <h3>Red Book Plants of Our Region</h3>
+        <div class="grid">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1550159930-4014eb113346?auto=format&fit=crop&q=80&w=400" class="plant-img" alt="Snowdrop">
+                <span class="red-book-tag">Endangered</span>
+                <h4>Snowdrop (Galanthus)</h4>
+                <p>A delicate flower found in the forests near the canyon. It requires strict protection.</p>
+            </div>
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1596272382604-069273f32e92?auto=format&fit=crop&q=80&w=400" class="plant-img" alt="Pulsatilla">
+                <span class="red-book-tag">Endangered</span>
+                <h4>Pulsatilla (Pasqueflower)</h4>
+                <p>Rare species blooming on the sunny slopes of the Dniester Canyon.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="challenges">
+        <h2>Eco Challenges</h2>
+        <p>Join our mission! Small actions create a big impact. Here is what you can do:</p>
+        <ul>
+            <li><strong>Zero Waste Week:</strong> Try using no plastic bags for 7 days.</li>
+            <li><strong>Paper Recycling:</strong> Collect and bring old paper to the school collection point.</li>
+            <li><strong>Energy Saver:</strong> Make sure all lights and screens are off after lessons.</li>
+        </ul>
     </section>
 
 </div>
 
 <footer>
-    <p>“Our project promotes eco-friendly values in school and shows how small actions can help protect the environment and build a better future.”</p>
-    <p>&copy; 2024 Project by Sherdyk</p>
+    <p>"Our project promotes eco-friendly values in school and shows how small actions can help protect the environment and build a better future."</p>
+    <p>&copy; 2024 Sherdyk | UNESCO Partner School Project</p>
 </footer>
 
 </body>
