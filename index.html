@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco-Style Life | School Project</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4a6741; /* Шавлієвий зелений */
+            --bg: #fcfdfc;
+            --text: #2d3436;
+            --accent: #8fb9a8;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+        }
+
+        header {
+            padding: 100px 20px;
+            text-align: center;
+            background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)), 
+                        url('https://images.unsplash.com/photo-1542601906990-b4d3fb773b09?auto=format&fit=crop&q=80&w=1600') no-repeat center/cover;
+        }
+
+        h1 { font-weight: 700; letter-spacing: -1px; font-size: 2.5rem; margin-bottom: 10px; color: var(--primary); }
+
+        nav {
+            position: sticky;
+            top: 0;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            padding: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            border-bottom: 1px solid #eee;
+            z-index: 1000;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: color 0.3s;
+        }
+
+        nav a:hover { color: var(--primary); }
+
+        section {
+            max-width: 900px;
+            margin: 60px auto;
+            padding: 0 20px;
+        }
+
+        h2 { border-left: 4px solid var(--accent); padding-left: 15px; margin-bottom: 30px; }
+
+        .video-box {
+            background: #000;
+            border-radius: 15px;
+            overflow: hidden;
+            aspect-ratio: 16/9;
+            margin: 30px 0;
+        }
+
+        /* Картки рослин */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+
+        .plant-card {
+            background: white;
+            border: 1px solid #f0f0f0;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .plant-card:hover { transform: translateY(-5px); }
+
+        .plant-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            background-color: #eee;
+        }
+
+        .plant-info { padding: 20px; }
+        .red-label { 
+            color: #d63031; 
+            font-size: 0.7rem; 
+            font-weight: bold; 
+            text-transform: uppercase; 
+        }
+
+        footer {
+            padding: 60px 20px;
+            background: #f1f3f1;
+            text-align: center;
+            font-style: italic;
+            font-size: 0.9rem;
+            color: #636e72;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#about">Проєкт</a>
+    <a href="#canyon">Каньйон</a>
+    <a href="#plants">Червона Книга</a>
+    <a href="#actions">Дії</a>
+</nav>
+
+<header>
+    <h1>Eco-Style Life</h1>
+    <p>UNESCO Sustainable Development Project</p>
+</header>
+
+<section id="about">
+    <h2>Відео про школу та місто</h2>
+    <p>Наше місто та школа активно впроваджують екологічні ініціативи. Подивіться наш короткий огляд:</p>
+    <div class="video-box">
+        <iframe width="100%" height="100%" src="https://www.youtube.com/embed/ваш-код-відео" frameborder="0" allowfullscreen></iframe>
+    </div>
+</section>
+
+<section id="canyon">
+    <h2>Дністровський каньйон</h2>
+    <p>Це унікальна екосистема. Ми вивчаємо її вплив на клімат нашого регіону та важливість збереження біорізноманіття.</p>
+</section>
+
+<section id="plants">
+    <h2>Рослини Червоної Книги</h2>
+    <div class="grid">
+        <div class="plant-card">
+            <img src="https://images.unsplash.com/photo-1550159930-4014eb113346?auto=format&fit=crop&q=80&w=400" alt="Підсніжник" class="plant-img">
+            <div class="plant-info">
+                <span class="red-label">Червона книга</span>
+                <h3>Підсніжник білосніжний</h3>
+                <p>Зустрічається в лісах вздовж каньйону. Цвіте у березні.</p>
+            </div>
+        </div>
+        <div class="plant-card">
+            <img src="https://images.unsplash.com/photo-1596272382604-069273f32e92?auto=format&fit=crop&q=80&w=400" alt="Шафран" class="plant-img">
+            <div class="plant-info">
+                <span class="red-label">Червона книга</span>
+                <h3>Шафран Гейфеля</h3>
+                <p>Рідкісна рослина, що потребує захисту від збирання.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>"Our project promotes eco-friendly values in school and shows how small actions can help protect the environment and build a better future."</p>
+</footer>
+
+</body>
+</html>
