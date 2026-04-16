@@ -6,12 +6,16 @@
     <title>Eco-Style Life | Zalishchyky Gymnasium</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
+        * {
+            box-sizing: border-box; /* Ensures padding doesn't break layout */
+        }
+
         :root {
             --primary-green: #4a6741;
             --soft-white: #fcfdfc;
             --text-dark: #2d3436;
             --accent-green: #8fb9a8;
-            --active-tab: #e8f5e9;
+            --error-red: #e74c3c;
         }
 
         body {
@@ -19,11 +23,11 @@
             margin: 0;
             background-color: var(--soft-white);
             color: var(--text-dark);
-            line-height: 1.8;
-            padding-top: 80px; /* Space for fixed nav */
+            line-height: 1.6;
+            padding-top: 100px;
         }
 
-        /* --- NAVIGATION (TABS) --- */
+        /* --- RESPONSIVE NAVIGATION --- */
         nav {
             position: fixed;
             top: 0;
@@ -32,7 +36,8 @@
             backdrop-filter: blur(10px);
             display: flex;
             justify-content: center;
-            padding: 15px 0;
+            flex-wrap: wrap; /* Allows tabs to wrap on mobile */
+            padding: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
             z-index: 1000;
         }
@@ -41,19 +46,22 @@
             background: none;
             border: none;
             color: var(--text-dark);
-            margin: 0 10px;
-            padding: 10px 20px;
-            font-size: 0.9rem;
+            margin: 5px;
+            padding: 8px 12px;
+            font-size: 0.75rem; /* Smaller for mobile first */
             font-weight: 700;
             text-transform: uppercase;
             cursor: pointer;
             transition: all 0.3s ease;
-            border-radius: 25px;
-            font-family: 'Montserrat', sans-serif;
+            border-radius: 20px;
         }
 
-        nav button:hover {
-            color: var(--primary-green);
+        @media (min-width: 600px) {
+            nav button {
+                font-size: 0.85rem;
+                padding: 10px 18px;
+            }
+            body { padding-top: 80px; }
         }
 
         nav button.active-nav {
@@ -61,126 +69,54 @@
             color: white;
         }
 
-        /* --- TAB CONTENT SECTIONS --- */
+        /* --- SECTIONS --- */
         .tab-content {
             display: none;
             animation: fadeIn 0.4s ease-in-out;
-            min-height: 80vh;
+            width: 100%;
         }
 
-        .tab-content.active {
-            display: block;
-        }
+        .tab-content.active { display: block; }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
+            from { opacity: 0; transform: translateY(5px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* --- HEADER & TYPOGRAPHY --- */
         header {
-            padding: 80px 20px;
+            padding: 60px 20px;
             text-align: center;
             background: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.9)), 
                         url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/42/Dniester_Canyon.jpg/1200px-Dniester_Canyon.jpg');
             background-size: cover;
             background-position: center;
-            border-bottom: 1px solid #eee;
         }
 
-        h1 { font-size: 3rem; color: var(--primary-green); margin: 0; }
-        .subtitle { font-size: 1.2rem; opacity: 0.8; }
-        h2 { font-size: 2rem; color: var(--primary-green); margin-bottom: 30px; text-align: center;}
+        h1 { font-size: 2rem; color: var(--primary-green); margin: 0; }
+        @media (min-width: 600px) { h1 { font-size: 3rem; } }
 
-        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
 
-        /* --- ABOUT US & MEDIA --- */
+        /* --- IMAGES & VIDEO --- */
         .zalishchyky-photo {
             width: 100%;
             border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
             margin: 20px 0;
-            object-fit: cover;
-            max-height: 400px;
         }
 
         .video-wrapper {
             background: #000;
-            border-radius: 20px;
+            border-radius: 15px;
             overflow: hidden;
             aspect-ratio: 16/9;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-            margin-top: 30px;
-        }
-
-        .grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            border: 1px solid #f0f0f0;
-            transition: transform 0.3s;
-        }
-
-        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.05); }
-
-        /* --- HABIT TRACKER STYLES --- */
-        .tracker-box {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            border: 2px solid var(--accent-green);
-        }
-
-        .tracker-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-
-        .habit-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-        }
-
-        .habit-item input {
-            width: 25px;
-            height: 25px;
-            margin-right: 15px;
-            cursor: pointer;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 20px;
-            background-color: #eee;
-            border-radius: 10px;
-            overflow: hidden;
-            margin-top: 20px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background-color: var(--primary-green);
-            width: 0%;
-            transition: width 0.5s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
         /* --- GAME STYLES --- */
         .game-box {
-            background: #f9fbf9;
-            padding: 40px;
+            background: #fff;
+            padding: 20px;
             border-radius: 15px;
             text-align: center;
             border: 2px dashed var(--primary-green);
@@ -188,78 +124,86 @@
 
         .game-stats {
             display: flex;
-            justify-content: space-around;
-            background: #e8f5e9;
+            flex-direction: column;
+            gap: 10px;
+            background: #f1f8f1;
             padding: 15px;
             border-radius: 10px;
-            margin-bottom: 20px;
-            font-weight: bold;
+            margin-bottom: 15px;
             color: var(--primary-green);
-            font-size: 1.2rem;
+            font-weight: bold;
         }
 
-        #game-item {
-            font-size: 80px;
-            margin: 20px 0;
-            height: 100px;
-            user-select: none;
+        @media (min-width: 600px) {
+            .game-stats { flex-direction: row; justify-content: space-around; }
         }
+
+        #game-item { font-size: 70px; margin: 15px 0; user-select: none; transition: transform 0.2s; }
 
         .bins {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        @media (min-width: 600px) {
+            .bins { grid-template-columns: repeat(4, 1fr); }
         }
 
         .bin-btn {
-            padding: 15px 30px;
-            font-size: 1rem;
+            padding: 12px;
+            font-size: 0.9rem;
             font-weight: bold;
             color: white;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            transition: transform 0.2s;
         }
 
-        .bin-btn:hover { transform: scale(1.05); }
-        .btn-paper { background: #3498db; }
-        .btn-plastic { background: #f1c40f; color: #333; }
-        .btn-organic { background: #2ecc71; }
-        .btn-glass { background: #95a5a6; }
+        #game-message { height: 30px; font-weight: bold; margin-bottom: 10px; }
 
-        #game-message {
-            height: 25px;
-            font-weight: bold;
-            margin-bottom: 20px;
-            font-size: 1.1rem;
+        /* --- TRACKER & CARDS --- */
+        .tracker-box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            border: 2px solid var(--accent-green);
         }
 
-        footer { text-align: center; padding: 40px; background: #f1f3f1; font-style: italic; border-top: 1px solid #ddd; }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+        }
+
+        footer { text-align: center; padding: 40px 20px; font-size: 0.9rem; opacity: 0.7; }
     </style>
 </head>
 <body>
 
 <nav>
-    <button class="nav-btn active-nav" onclick="openTab('tab-home', this)">Home & About</button>
-    <button class="nav-btn" onclick="openTab('tab-tracker', this)">Daily Tracker</button>
-    <button class="nav-btn" onclick="openTab('tab-game', this)">Eco Game</button>
-    <button class="nav-btn" onclick="openTab('tab-actions', this)">Local Nature</button>
+    <button class="nav-btn active-nav" onclick="openTab('tab-home', this)">Home</button>
+    <button class="nav-btn" onclick="openTab('tab-tracker', this)">Tracker</button>
+    <button class="nav-btn" onclick="openTab('tab-game', this)">Game</button>
+    <button class="nav-btn" onclick="openTab('tab-actions', this)">Nature</button>
 </nav>
 
 <div id="tab-home" class="tab-content active">
     <header>
         <h1>Eco-Style Life</h1>
-        <p class="subtitle">UNESCO Sustainable Development Project</p>
+        <p>Zalishchyky State Gymnasium</p>
     </header>
     <div class="container">
-        <h2>Our School and Beautiful Zalishchyky</h2>
-        <p>Welcome to the <strong>Zalishchyky State Gymnasium</strong>! We are proud to lead this eco-project from our incredible hometown. Zalishchyky is a unique and picturesque city, famously situated on a peninsula formed by a sweeping meander of the Dniester River. Surrounded by such spectacular nature, we feel a deep responsibility to protect our environment.</p>
-        
-        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Zalishchyky_panorama.jpg/1200px-Zalishchyky_panorama.jpg" alt="Zalishchyky Dniester Meander" class="zalishchyky-photo">
-        
-        <p>This project is designed to promote an eco-friendly lifestyle. Watch our video to see how we protect nature through daily actions.</p>
+        <h2>About Our City</h2>
+        <p>Zalishchyky is a unique town on a peninsula, surrounded by the Dniester River. Our school works to preserve this beauty for future generations.</p>
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c5/Zalishchyky_panorama.jpg/1200px-Zalishchyky_panorama.jpg" alt="Zalishchyky" class="zalishchyky-photo">
         <div class="video-wrapper">
             <iframe width="100%" height="100%" src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen></iframe>
         </div>
@@ -268,38 +212,16 @@
 
 <div id="tab-tracker" class="tab-content">
     <div class="container">
-        <h2>Daily Eco-Habit Tracker</h2>
-        <p style="text-align:center;">Tick the boxes when you complete an eco-friendly action. <strong>This tracker resets automatically every night at midnight!</strong></p>
-        
+        <h2 style="text-align: center;">Daily Habit Tracker</h2>
         <div class="tracker-box">
-            <div class="tracker-header">
-                <strong id="tracker-date" style="color: var(--primary-green);">Today</strong>
-                <span id="tracker-status">0/5 Completed</span>
-            </div>
-
-            <div class="habit-item">
-                <input type="checkbox" class="habit-cb" onchange="updateTracker()">
-                <label>Used a reusable water bottle today</label>
-            </div>
-            <div class="habit-item">
-                <input type="checkbox" class="habit-cb" onchange="updateTracker()">
-                <label>Said NO to single-use plastic bags</label>
-            </div>
-            <div class="habit-item">
-                <input type="checkbox" class="habit-cb" onchange="updateTracker()">
-                <label>Turned off lights when leaving the room</label>
-            </div>
-            <div class="habit-item">
-                <input type="checkbox" class="habit-cb" onchange="updateTracker()">
-                <label>Sorted my trash properly</label>
-            </div>
-            <div class="habit-item">
-                <input type="checkbox" class="habit-cb" onchange="updateTracker()">
-                <label>Walked or used eco-transport</label>
-            </div>
-            
-            <div class="progress-bar">
-                <div class="progress-fill" id="progress-fill"></div>
+            <div id="tracker-date" style="font-weight: bold; color: var(--primary-green); margin-bottom: 15px;">Date: --</div>
+            <div class="habit-item"><input type="checkbox" class="habit-cb" onchange="updateTracker()"> Reusable bottle</div>
+            <div class="habit-item"><input type="checkbox" class="habit-cb" onchange="updateTracker()"> No plastic bags</div>
+            <div class="habit-item"><input type="checkbox" class="habit-cb" onchange="updateTracker()"> Lights off</div>
+            <div class="habit-item"><input type="checkbox" class="habit-cb" onchange="updateTracker()"> Sorted trash</div>
+            <div class="habit-item"><input type="checkbox" class="habit-cb" onchange="updateTracker()"> Eco-transport</div>
+            <div style="background:#eee; height:15px; border-radius:10px; margin-top:20px; overflow:hidden;">
+                <div id="progress-fill" style="background:var(--primary-green); width:0%; height:100%; transition:0.4s;"></div>
             </div>
         </div>
     </div>
@@ -307,28 +229,21 @@
 
 <div id="tab-game" class="tab-content">
     <div class="container">
-        <h2>Mini-Game: Recycle Master</h2>
-        <p style="text-align:center;">Sort the items into the correct bins. Earn 10 points for the right choice, lose 5 for the wrong one. <strong>Compete to increase your Rank and beat the High Score!</strong></p>
-        
+        <h2 style="text-align: center;">Recycle Master</h2>
+        <p style="text-align:center; font-size:0.9rem;">Don't make a mistake! One wrong move resets your score.</p>
         <div class="game-box">
-            
             <div class="game-stats">
                 <div id="game-score">Score: 0</div>
                 <div id="game-highscore">High Score: 0</div>
-                <div id="game-rank">Rank: 👶 Novice</div>
+                <div id="game-rank">Rank: Novice</div>
             </div>
-
-            <div id="game-message">Ready? Start sorting!</div>
-            
-            <div id="game-play-area">
-                <div id="game-item">🍎</div>
-                
-                <div class="bins">
-                    <button class="bin-btn btn-paper" onclick="makeGuess('paper')">Paper</button>
-                    <button class="bin-btn btn-plastic" onclick="makeGuess('plastic')">Plastic</button>
-                    <button class="bin-btn btn-glass" onclick="makeGuess('glass')">Glass</button>
-                    <button class="bin-btn btn-organic" onclick="makeGuess('organic')">Organic</button>
-                </div>
+            <div id="game-message">Start Sorting!</div>
+            <div id="game-item">🍎</div>
+            <div class="bins">
+                <button class="bin-btn btn-paper" onclick="makeGuess('paper')">Paper</button>
+                <button class="bin-btn btn-plastic" onclick="makeGuess('plastic')">Plastic</button>
+                <button class="bin-btn btn-glass" onclick="makeGuess('glass')">Glass</button>
+                <button class="bin-btn btn-organic" onclick="makeGuess('organic')">Organic</button>
             </div>
         </div>
     </div>
@@ -336,165 +251,96 @@
 
 <div id="tab-actions" class="tab-content">
     <div class="container">
-        <h2>Local Nature: Dniester Canyon</h2>
-        <p style="text-align:center;">We research local biodiversity, specifically the <strong>Dniester Canyon</strong>, one of the natural wonders of Ukraine.</p>
+        <h2 style="text-align: center;">Dniester Canyon</h2>
         <div class="grid">
             <div class="card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Galanthus_nivalis.jpg/800px-Galanthus_nivalis.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:10px;" alt="Snowdrop">
-                <h4 style="color:red; margin-bottom:0; font-size: 0.8rem; text-transform: uppercase;">Endangered</h4>
-                <h3>Snowdrop (Galanthus)</h3>
-                <p>A delicate flower found in the forests near the canyon. It requires strict protection.</p>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/30/Galanthus_nivalis.jpg/800px-Galanthus_nivalis.jpg" style="width:100%; height:150px; object-fit:cover; border-radius:8px;">
+                <h3>Snowdrop</h3>
+                <p>An endangered flower found in our local forests.</p>
             </div>
             <div class="card">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Pulsatilla_grandis_02.jpg/800px-Pulsatilla_grandis_02.jpg" style="width:100%; height:200px; object-fit:cover; border-radius:10px;" alt="Pulsatilla">
-                <h4 style="color:red; margin-bottom:0; font-size: 0.8rem; text-transform: uppercase;">Endangered</h4>
-                <h3>Pulsatilla (Pasqueflower)</h3>
-                <p>Rare species blooming on the sunny slopes of the Dniester Canyon.</p>
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/62/Pulsatilla_grandis_02.jpg/800px-Pulsatilla_grandis_02.jpg" style="width:100%; height:150px; object-fit:cover; border-radius:8px;">
+                <h3>Pasqueflower</h3>
+                <p>Rare flora blooming on the canyon slopes.</p>
             </div>
         </div>
     </div>
 </div>
 
 <footer>
-    <p>"Our project promotes eco-friendly values in school and shows how small actions can help protect the environment and build a better future."</p>
-    <p>&copy; 2024 Zalishchyky State Gymnasium | UNESCO Partner School Project</p>
+    <p>&copy; 2024 Zalishchyky State Gymnasium</p>
 </footer>
 
 <script>
-    // --- TAB SWITCHING LOGIC ---
-    function openTab(tabId, btnElement) {
-        // Hide all tabs
-        const tabs = document.querySelectorAll('.tab-content');
-        tabs.forEach(tab => tab.classList.remove('active'));
-
-        // Remove active class from all buttons
-        const btns = document.querySelectorAll('.nav-btn');
-        btns.forEach(btn => btn.classList.remove('active-nav'));
-
-        // Show target tab and highlight button
+    // TABS
+    function openTab(tabId, btn) {
+        document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+        document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active-nav'));
         document.getElementById(tabId).classList.add('active');
-        btnElement.classList.add('active-nav');
-        
-        // Scroll to top
-        window.scrollTo(0, 0);
+        btn.classList.add('active-nav');
+        window.scrollTo(0,0);
     }
 
-    // --- DAILY HABIT TRACKER LOGIC ---
-    const checkboxes = document.querySelectorAll('.habit-cb');
-    const progressBar = document.getElementById('progress-fill');
-    const statusText = document.getElementById('tracker-status');
-    const dateDisplay = document.getElementById('tracker-date');
-
-    function checkDailyReset() {
-        const today = new Date().toLocaleDateString('en-GB'); 
-        dateDisplay.innerText = "Date: " + today;
-        
-        const savedDate = localStorage.getItem('tracker_date');
-
-        if (savedDate !== today) {
-            checkboxes.forEach((cb, i) => {
-                localStorage.removeItem('eco_habit_' + i);
-                cb.checked = false;
-            });
-            localStorage.setItem('tracker_date', today);
-        } else {
-            checkboxes.forEach((cb, i) => {
-                const savedState = localStorage.getItem('eco_habit_' + i);
-                if (savedState === 'true') cb.checked = true;
-            });
-        }
-        updateTracker();
-    }
-
+    // TRACKER
     function updateTracker() {
-        let checkedCount = 0;
-        checkboxes.forEach((cb, index) => {
-            localStorage.setItem('eco_habit_' + index, cb.checked);
-            if (cb.checked) checkedCount++;
-        });
-        
-        const percentage = (checkedCount / checkboxes.length) * 100;
-        progressBar.style.width = percentage + '%';
-        statusText.innerText = checkedCount + "/" + checkboxes.length + " Completed";
+        const cbs = document.querySelectorAll('.habit-cb');
+        let checked = 0;
+        cbs.forEach(cb => { if(cb.checked) checked++; });
+        document.getElementById('progress-fill').style.width = (checked/cbs.length*100) + '%';
     }
 
-    // --- MINI GAME LOGIC ---
+    // GAME
     let score = 0;
-    let highScore = localStorage.getItem('zal_eco_highscore') || 0;
+    let highScore = localStorage.getItem('eco_hs') || 0;
     let currentItem = {};
-    
     const items = [
-        { emoji: '🍎', type: 'organic' }, { emoji: '🍌', type: 'organic' }, { emoji: '🍂', type: 'organic' }, 
-        { emoji: '🍉', type: 'organic' }, { emoji: '🥕', type: 'organic' },
-        { emoji: '📰', type: 'paper' }, { emoji: '📦', type: 'paper' }, { emoji: '📄', type: 'paper' }, 
-        { emoji: '✉️', type: 'paper' }, { emoji: '🎫', type: 'paper' },
-        { emoji: '🥤', type: 'plastic' }, { emoji: '🛍️', type: 'plastic' }, { emoji: '🧴', type: 'plastic' }, 
-        { emoji: '🪥', type: 'plastic' }, { emoji: '🥡', type: 'plastic' },
-        { emoji: '🍾', type: 'glass' }, { emoji: '🫙', type: 'glass' }, { emoji: '🍷', type: 'glass' }
+        {e:'🍎', t:'organic'}, {e:'🍌', t:'organic'}, {e:'📦', t:'paper'}, 
+        {e:'📰', t:'paper'}, {e:'🥤', t:'plastic'}, {e:'🛍️', t:'plastic'}, 
+        {e:'🍾', t:'glass'}, {e:'🫙', t:'glass'}
     ];
 
-    const displayItem = document.getElementById('game-item');
-    const scoreDisplay = document.getElementById('game-score');
-    const highScoreDisplay = document.getElementById('game-highscore');
-    const rankDisplay = document.getElementById('game-rank');
-    const messageDisplay = document.getElementById('game-message');
-
-    function getRank(points) {
-        if (points >= 150) return "🌍 Planet Savior";
-        if (points >= 100) return "🏆 Master Recycler";
-        if (points >= 50) return "🌱 Eco-Warrior";
-        if (points >= 20) return "♻️ Learner";
-        return "👶 Novice";
-    }
-
-    function updateStatsDisplay() {
-        scoreDisplay.innerText = "Score: " + score;
-        highScoreDisplay.innerText = "High Score: " + highScore;
-        rankDisplay.innerText = "Rank: " + getRank(score);
+    function updateGameUI() {
+        document.getElementById('game-score').innerText = "Score: " + score;
+        document.getElementById('game-highscore').innerText = "High Score: " + highScore;
+        let rank = "Novice";
+        if(score >= 50) rank = "Eco-Warrior";
+        if(score >= 100) rank = "Planet Savior";
+        document.getElementById('game-rank').innerText = "Rank: " + rank;
     }
 
     function nextItem() {
-        const randomIndex = Math.floor(Math.random() * items.length);
-        currentItem = items[randomIndex];
-        displayItem.innerText = currentItem.emoji;
+        currentItem = items[Math.floor(Math.random()*items.length)];
+        document.getElementById('game-item').innerText = currentItem.e;
     }
 
-    function makeGuess(guessedType) {
-        if (guessedType === currentItem.type) {
+    function makeGuess(type) {
+        const msg = document.getElementById('game-message');
+        if(type === currentItem.type) {
             score += 10;
-            messageDisplay.innerText = "Correct! +10";
-            messageDisplay.style.color = "#2ecc71";
+            msg.innerText = "Correct! +10";
+            msg.style.color = "var(--primary-green)";
         } else {
-            score -= 5;
-            if(score < 0) score = 0; // Don't let score go below 0
-            messageDisplay.innerText = "Oops! That goes in " + currentItem.type;
-            messageDisplay.style.color = "#e74c3c";
+            score = 0; // RESET SCORE ON MISTAKE
+            msg.innerText = "WRONG! Score Reset!";
+            msg.style.color = "var(--error-red)";
         }
-
-        // Update High Score
-        if (score > highScore) {
-            highScore = score;
-            localStorage.setItem('zal_eco_highscore', highScore);
-        }
-
-        updateStatsDisplay();
         
-        // Animation effect
-        displayItem.style.transform = "scale(0.5)";
-        setTimeout(() => {
-            nextItem();
-            displayItem.style.transform = "scale(1)";
-        }, 200);
+        if(score > highScore) {
+            highScore = score;
+            localStorage.setItem('eco_hs', highScore);
+        }
+        
+        updateGameUI();
+        nextItem();
     }
 
-    // Initialize when page loads
     window.onload = () => {
-        checkDailyReset();
-        updateStatsDisplay();
+        document.getElementById('tracker-date').innerText = "Date: " + new Date().toLocaleDateString();
+        updateGameUI();
         nextItem();
     };
 </script>
-
 </body>
 </html>
+ 
  
